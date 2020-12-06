@@ -1,0 +1,39 @@
+{
+    "name": "frida-script",
+    "version": "1.0.0",
+    "description": "a control for wework",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rm -rf ./dist && webpack",
+        "dev": "webpack --watch",
+        "lint": "eslint './src/**/*.{js,ts,tsx}' --quiet --fix"
+    },
+    "repository": {
+        "type": "git",
+        "url": "ssh://git@git.sankuai.com/mtweb/weworkcontrol.git"
+    },
+    "author": "wangzidong",
+    "license": "ISC",
+    "dependencies": {
+        "@types/frida-gum": "^16.1.0",
+        "@babel/core": "^7.10.2",
+        "@babel/plugin-transform-runtime": "^7.10.1",
+        "@babel/preset-env": "^7.10.2",
+        "@babel/runtime": "^7.10.2",
+        "@typescript-eslint/eslint-plugin": "^3.2.0",
+        "@typescript-eslint/parser": "^3.2.0",
+        "babel-loader": "^8.1.0",
+        "clean-webpack-plugin": "^3.0.0",
+        "core-js": "3",
+        "eslint": "^7.2.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-prettier": "^3.1.3",
+        "md5": "^2.2.1",
+        "prettier": "^2.0.5",
+        "ts-loader": "^7.0.5",
+        "typescript": "^3.9.5",
+        "webpack": "^4.43.0",
+        "webpack-cli": "^3.3.11"
+    }
+}

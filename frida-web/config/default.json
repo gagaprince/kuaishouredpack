@@ -1,0 +1,14 @@
+{
+    "appkey": "",
+    "port": "9999",
+    "timeout": 50000,
+    "reportDomain": "a",
+    "reportRiskDomain": "a",
+    "reportTimeout": 300000,
+    "adbPath": "adbtool-linux",
+    "accessKeyId": "",
+    "accessKeySecret": "",
+    "endpoint": "",
+    "bucket": "",
+    "s3preUrl": ""
+}

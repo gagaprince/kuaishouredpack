@@ -1,0 +1,25 @@
+{
+  "name": "kuaishouredpack",
+  "version": "1.0.0",
+  "description": "a redpack tools for kuaishou",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint-staged": "lint-staged -c lint-staged.config.js"
+  },
+  "author": "wangzidong",
+  "license": "ISC",
+  "devDependencies": {
+    "globby": "^10.0.1",
+    "husky": "^3.0.8",
+    "lint-staged": "^9.2.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "dependencies": {
+    "fs-extra": "^9.0.1"
+  }
+}

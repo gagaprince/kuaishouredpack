@@ -1,0 +1,9 @@
+{
+    "appkey": "1",
+    "port": "8080",
+    "timeout": 10000,
+    "reportDomain": "http://10.24.39.175:8088",
+    "reportRiskDomain": "",
+    "reportTimeout": 10000,
+    "adbPath": "adbtool-mac"
+}

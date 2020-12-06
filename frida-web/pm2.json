@@ -1,0 +1,19 @@
+{
+    "apps": [
+        {
+            "name": "weworkcontrol.app",
+            "script": "./dist/main.js",
+            "env": {},
+            "exec_interpreter": "node",
+            "exec_mode": "cluster_mode",
+            "instances": 1,
+            "log_date_format": "YYYY-MM-DD HH:mm Z",
+            "max_memory_restart": "1200M",
+            "merge_logs": true,
+            "error_file": "/var/sankuai/logs/weworkcontrol/console-error.log",
+            "out_file": "/var/sankuai/logs/weworkcontrol/console-out.log",
+            "pid_file": "/var/sankuai/logs/weworkcontrol/weworkcontrol.pid",
+            "watch": false
+        }
+    ]
+}
