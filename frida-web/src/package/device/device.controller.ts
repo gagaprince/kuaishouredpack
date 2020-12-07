@@ -25,7 +25,7 @@ export class DeviceController {
 
     @Get('/reloadApp')
     async reloadApp(@Query() query: IDevice){
-        const device = this.deviceService.getDevice(query.phoneNumber);
+        const device = this.deviceService.getDeviceByLion(query.phoneNumber);
         await this.adbService.restartAppByDevice(device);
         await this.deviceService.reloadDevice(device);
         return {code:0,success:true};
@@ -33,7 +33,7 @@ export class DeviceController {
 
     @Get('/stopApp')
     async stopApp(@Query() query: IDevice){
-        const device = this.deviceService.getDevice(query.phoneNumber);
+        const device = this.deviceService.getDeviceByLion(query.phoneNumber);
         await this.adbService.stopAppByDevice(device);
         return {code:0,success:true};
     }
