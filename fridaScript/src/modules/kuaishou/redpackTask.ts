@@ -159,22 +159,23 @@ const hookRedPacketResult = () => {
             }
             timeList.push(stepTime);
         }
+        console.log(JSON.stringify(timeList));
         return this.a.apply(this, arguments);
     }
 
-    // const LiveFellowRedPacketLuckyUsersResponse = Java.use('com.kuaishou.live.core.show.redpacket.fellowredpacket.model.LiveFellowRedPacketLuckyUsersResponse');
-    // LiveFellowRedPacketLuckyUsersResponse.getItems.implementation = function(){
-    //     const list = this.getItems.apply(this,arguments);
-    //     console.log('size:'+list.size());
-    //     if(list.size()>24){
-    //         stepTime+=5;
-    //         console.log('红包慢了，stepTime+5:'+stepTime);
-    //     }else{
-    //         stepTime-=10;
-    //         console.log('红包快了，stepTime-10:'+stepTime);
-    //     }
-    //     return list;
-    // }
+    const LiveFellowRedPacketLuckyUsersResponse = Java.use('com.kuaishou.live.core.show.redpacket.fellowredpacket.model.LiveFellowRedPacketLuckyUsersResponse');
+    LiveFellowRedPacketLuckyUsersResponse.getItems.implementation = function () {
+        const list = this.getItems.apply(this, arguments);
+        console.log('size:' + list.size());
+        if (list.size() > 24) {
+            stepTime += 5;
+            console.log('红包慢了，stepTime+5:' + stepTime);
+        } else {
+            stepTime -= 5;
+            console.log('红包快了，stepTime-5:' + stepTime);
+        }
+        return list;
+    }
 }
 
 const hookAndOpenResultList = () => {
