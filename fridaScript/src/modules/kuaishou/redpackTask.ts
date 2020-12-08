@@ -159,7 +159,7 @@ const hookRedPacketResult = () => {
             }
             timeList.push(stepTime);
         }
-        console.log(JSON.stringify(timeList));
+        console.log(JSON.stringify(giftData));
         return this.a.apply(this, arguments);
     }
 
