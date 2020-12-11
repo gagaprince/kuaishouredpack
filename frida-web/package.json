@@ -44,7 +44,7 @@
     "eslint": "7.1.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
-    "frida": "12.11.1",
+    "frida": "14.1.2",
     "jest": "26.0.1",
     "mos-mss": "^1.1.8",
     "node-mysql-promise": "^0.0.7",
