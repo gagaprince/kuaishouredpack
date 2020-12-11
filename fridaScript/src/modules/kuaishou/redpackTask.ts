@@ -1,4 +1,6 @@
-export const startRedPackTask = () => {
+let whoami = '';
+export const startRedPackTask = (phoneNumber: string) => {
+    whoami = phoneNumber;
     Java.perform(() => {
         openGiftPack();
         findLiveFellowRedPacketFloatView();
@@ -158,6 +160,13 @@ const hookRedPacketResult = () => {
                 giftData[ret.mDisplayTotalCoin.value] = timeList;
             }
             timeList.push(stepTime);
+            // 发送获奖消息
+            send(`grubResult::${JSON.stringify({
+                price: ret.mDisplayTotalCoin.value,
+                preGrubTime: stepTime,
+                owner: whoami,
+                grubTime: Date.now()
+            })}`)
         }
         send(JSON.stringify(giftData));
         return this.a.apply(this, arguments);

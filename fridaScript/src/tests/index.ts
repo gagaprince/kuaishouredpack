@@ -12,8 +12,8 @@ import {
 
 const main = async () => {
     await openLiveSquareActivity();
-    setTimeout(()=>{
-        startRedPackTask()
-    },6000);
+    setTimeout(() => {
+        startRedPackTask('100')
+    }, 6000);
 };
 setTimeout(main);

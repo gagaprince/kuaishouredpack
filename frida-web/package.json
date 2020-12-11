@@ -47,6 +47,7 @@
     "frida": "14.1.2",
     "jest": "26.0.1",
     "mos-mss": "^1.1.8",
+    "node-mysql-promise": "^0.0.7",
     "pm2": "2.10.4",
     "prettier": "^1.19.1",
     "reflect-metadata": "^0.1.13",

@@ -182,7 +182,7 @@ export class DeviceService {
      * @param device 设备基础信息
      */
     async initDevice(device: IDevice, isThrow?: boolean): Promise<IDevice> {
-        const { ip, port } = device;
+        const { ip, port, phoneNumber } = device;
         let fridaDevice: any;
         if (ip == 'default') {
             fridaDevice = await frida.getUsbDevice();
@@ -217,6 +217,7 @@ export class DeviceService {
                 device.api = script.exports;
                 device.session = session;
                 device.status = DEVICE_STATUS.NORMAL;
+                device.api.init(phoneNumber);
                 deviceDebug('初始化device成功');
                 deviceDebug(device);
                 return device;
@@ -232,7 +233,7 @@ export class DeviceService {
         return null;
     }
     addDeviceChangeListener() {
-       
+
     }
     getAllDevice() {
         const devices = [];

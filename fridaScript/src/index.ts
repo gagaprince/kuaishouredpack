@@ -8,17 +8,20 @@ import {
  * 屏蔽掉上报接口
  */
 const main = () => {
-    Java.perform(async function () {
-        // initGroup();
-        await openLiveSquareActivity();
-        setTimeout(()=>{
-            startRedPackTask()
-        },6000);
-    });
+
 };
 setTimeout(main); // 异步切入
 
 rpc.exports = {
     openLiveSquareActivity,
-    startRedPackTask
+    startRedPackTask,
+    init(phoneNumber: string) {
+        Java.perform(async function () {
+            // initGroup();
+            await openLiveSquareActivity();
+            setTimeout(() => {
+                startRedPackTask(phoneNumber)
+            }, 6000);
+        });
+    }
 };
