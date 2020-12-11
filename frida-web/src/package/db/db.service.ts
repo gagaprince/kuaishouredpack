@@ -27,14 +27,14 @@ export class DbService {
         });
 
         // test code
-        setTimeout(() => {
-            this.anaysMsg(`grubResult::${JSON.stringify({
-                price: 10,
-                owner: '17701308857',
-                grubTime: Date.now(),
-                preGrubTime: 800
-            })}`)
-        }, 2000);
+        // setTimeout(() => {
+        //     this.anaysMsg(`grubResult::${JSON.stringify({
+        //         price: 10,
+        //         owner: '17701308857',
+        //         grubTime: Date.now(),
+        //         preGrubTime: 800
+        //     })}`)
+        // }, 2000);
     }
 
     anaysMsg(msg: string) {
