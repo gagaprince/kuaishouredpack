@@ -29,13 +29,13 @@ const slideNextpage = () => {
         } else {
             Java.choose('com.yxcorp.plugin.live.widget.LiveSlideViewPager', {
                 onMatch: function (instance) {
-                    console.log(instance);
-                    console.log('找到LiveSlideViewPager');
+                    send(instance + '');
+                    send('找到LiveSlideViewPager');
                     slidePlayViewPager = instance;
                     goNext();
                 },
                 onComplete: function () {
-                    console.log('查找LiveSlideViewPager完毕')
+                    send('查找LiveSlideViewPager完毕')
                 }
             });
         }
@@ -46,9 +46,9 @@ const findLiveFellowRedPacketFloatView = () => {
     var openNum = 0;
     Java.choose('com.kuaishou.live.core.show.redpacket.fellowredpacket.widget.LiveFellowRedPacketFloatView', {
         onMatch: function (instance) {
-            console.log('找到 LiveFellowRedPacketFloatView');
-            console.log("红包信息:" + instance.getRedPackInfo());
-            console.log("倒计时:" + instance.g.values);
+            send('找到 LiveFellowRedPacketFloatView');
+            send("红包信息:" + instance.getRedPackInfo());
+            send("倒计时:" + instance.g.values);
             const rect = getRect(instance);
             const top = rect.top.value;
             const bottom = rect.bottom.value;
@@ -57,14 +57,14 @@ const findLiveFellowRedPacketFloatView = () => {
                     instance.j.value.a(instance.getRedPackInfo());
                     openNum += 1;
                 } catch (e) {
-                    console.log(e);
+                    send(e);
                 }
             }
         },
         onComplete: function () {
-            console.log('当前时间:' + Date.now());
+            send('当前时间:' + Date.now());
             if (openNum == 0) {
-                console.log('当前直播间没有红包了，换个直播间吧！');
+                send('当前直播间没有红包了，换个直播间吧！');
                 slideNextpage();
                 setTimeout(function () {
                     Java.perform(function () {
@@ -81,8 +81,8 @@ let gloabDialogFragment: any;
 const startOpenPack = (LiveRedPacketSnatchDialogFragment: IJavaInstance, isFromDialog?: boolean) => {
     if (LiveRedPacketSnatchDialogFragment.x.value == 1) {
         const time = LiveRedPacketSnatchDialogFragment.w.value.d();
-        // console.log("time:"+time);
-        // console.log("packId:"+LiveRedPacketSnatchDialogFragment.w.value.j())
+        // send("time:"+time);
+        // send("packId:"+LiveRedPacketSnatchDialogFragment.w.value.j())
         var delay = time - 5000;
         if (delay < 0) {
             delay = 5;
@@ -116,11 +116,11 @@ const startOpenPack = (LiveRedPacketSnatchDialogFragment: IJavaInstance, isFromD
 const scanDialog = () => {
     Java.choose('com.kuaishou.live.core.show.redpacket.snatch.LiveRedPacketSnatchDialogFragment', {
         onMatch: function (instance) {
-            console.log('找到 LiveRedPacketSnatchDialogFragment');
+            send('找到 LiveRedPacketSnatchDialogFragment');
             startOpenPack(instance);
         },
         onComplete: function () {
-            console.log('找到LiveRedPacketSnatchDialogFragment完毕');
+            send('找到LiveRedPacketSnatchDialogFragment完毕');
         }
     })
 }
@@ -128,7 +128,7 @@ const scanDialog = () => {
 const openGiftPack = () => {
     const hongBaoService = Java.use('j.c.a.a.a.g2.a0.h0');
     hongBaoService.a.overload('j.c.a.a.a.g2.a0.r0.d').implementation = function () {
-        console.log("有红包打开，重新扫描dialog！");
+        send("有红包打开，重新扫描dialog！");
         // printStack();
         setTimeout(function () {
             Java.perform(function () {
@@ -144,14 +144,14 @@ let giftData: any = {};
 const hookRedPacketResult = () => {
     const manager = Java.use('j.c.a.a.a.g2.a0.o0');
     manager.a.overload('java.lang.String', 'j.c.a.a.a.g2.a0.r0.e').implementation = function () {
-        console.log('grab result');
+        send('grab result');
         // printStack();
-        console.log(JSON.stringify(arguments));
+        send(JSON.stringify(arguments));
         const ret = arguments[1];
-        console.log('是否抢到红包:' + ret.mIsGrabbed.value);
-        console.log('礼物列表:' + ret.mGiftList.value.size());
+        send('是否抢到红包:' + ret.mIsGrabbed.value);
+        send('礼物列表:' + ret.mGiftList.value.size());
         if (ret.mIsGrabbed.value) {
-            console.log('礼物价值:' + ret.mDisplayTotalCoin.value);
+            send('礼物价值:' + ret.mDisplayTotalCoin.value);
             var timeList = giftData[ret.mDisplayTotalCoin.value];
             if (!timeList) {
                 timeList = [];
@@ -159,20 +159,20 @@ const hookRedPacketResult = () => {
             }
             timeList.push(stepTime);
         }
-        console.log(JSON.stringify(giftData));
+        send(JSON.stringify(giftData));
         return this.a.apply(this, arguments);
     }
 
     const LiveFellowRedPacketLuckyUsersResponse = Java.use('com.kuaishou.live.core.show.redpacket.fellowredpacket.model.LiveFellowRedPacketLuckyUsersResponse');
     LiveFellowRedPacketLuckyUsersResponse.getItems.implementation = function () {
         const list = this.getItems.apply(this, arguments);
-        console.log('size:' + list.size());
+        send('size:' + list.size());
         if (list.size() > 24) {
             stepTime += 5;
-            console.log('红包慢了，stepTime+5:' + stepTime);
+            send('红包慢了，stepTime+5:' + stepTime);
         } else {
             stepTime -= 5;
-            console.log('红包快了，stepTime-5:' + stepTime);
+            send('红包快了，stepTime-5:' + stepTime);
         }
         return list;
     }
@@ -186,7 +186,7 @@ const hookAndOpenResultList = () => {
             if (gloabDialogFragment) {
                 setTimeout(function () {
                     Java.perform(function () {
-                        console.log('x:' + gloabDialogFragment.x.value);
+                        send('x:' + gloabDialogFragment.x.value);
                         Java.scheduleOnMainThread(function () {
                             gloabDialogFragment.B.value.n();
                         });
