@@ -5,6 +5,12 @@ export const DeviceList: IDevice[] = [{
     port: 12346,
     adbPort: 12345,
     status: DEVICE_STATUS.OFFLINE
+},{
+    phoneNumber: '13700009167',
+    ip: 'gagalulu.wang',
+    port: 12350,
+    adbPort: 12349,
+    status: DEVICE_STATUS.OFFLINE
 }];
 
 /**
