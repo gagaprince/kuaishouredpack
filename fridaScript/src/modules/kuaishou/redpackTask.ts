@@ -161,13 +161,13 @@ const hookRedPacketResult = () => {
             }
             timeList.push(stepTime);
             // 发送获奖消息
-            send(`grubResult::${JSON.stringify({
-                price: ret.mDisplayTotalCoin.value,
-                preGrubTime: stepTime,
-                owner: whoami,
-                grubTime: Date.now()
-            })}`)
         }
+        send(`grubResult::${JSON.stringify({
+            price: ret.mDisplayTotalCoin.value,
+            preGrubTime: stepTime,
+            owner: whoami,
+            grubTime: Date.now()
+        })}`)
         send(JSON.stringify(giftData));
         return this.a.apply(this, arguments);
     }

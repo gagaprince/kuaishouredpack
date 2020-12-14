@@ -41,8 +41,10 @@ export class DbService {
         if (msg && typeof msg === 'string' && msg.startsWith('grubResult::')) {
             const msgList = msg.split('::');
             const msgData: GrubRecord = JSON.parse(msgList[1] || '{}');
-            dbDebug('要插入的数据:' + JSON.stringify(msgData));
-            this.addGrubRecord(msgData);
+            if (msgData.price > 0) {
+                dbDebug('要插入的数据:' + JSON.stringify(msgData));
+                this.addGrubRecord(msgData);
+            }
         }
     }
 
