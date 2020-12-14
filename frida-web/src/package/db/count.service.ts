@@ -45,7 +45,12 @@ export class CountService {
         if (count > 30) {
             this.resetCount(grubRecord);
             countDebug('计数器满 重启设备');
-            while (await this.deviceService.restartApp(owner)) { }
+            while (true) {
+                const flag = await this.deviceService.restartApp(owner)
+                if(flag){
+                    break;
+                }
+            }
         }
     }
     resetCount(grubRecord: GrubRecord) {
