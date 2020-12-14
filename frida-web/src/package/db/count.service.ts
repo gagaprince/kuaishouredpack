@@ -28,6 +28,7 @@ export class CountService {
                 this.resetCount(msgData);
                 countDebug('获奖，重置计数器');
             } else {
+                countDebug('未获奖,增加计数器');
                 this.addCount(msgData);
             }
         }

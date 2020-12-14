@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { DbService } from './db.service';
+import { CountService } from './count.service';
 import { DeviceModule } from '../device/device.module'
 
 @Module({
@@ -7,5 +8,5 @@ import { DeviceModule } from '../device/device.module'
   providers: [DbService]
 })
 export class DbModule {
-  constructor(private readonly dbService: DbService) { }
+  constructor(private readonly dbService: DbService, private readonly countService: CountService) { }
 }
