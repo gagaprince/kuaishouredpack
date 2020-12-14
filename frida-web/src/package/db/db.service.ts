@@ -23,7 +23,13 @@ export class DbService {
             database: 'kuaishouredpack',
         });
         this.deviceService.addMessageListener((msg: string) => {
-            this.anaysMsg(msg);
+            setTimeout(()=>{
+                try{
+                    this.anaysMsg(msg);
+                }catch(e){
+                    dbDebug(e);
+                }
+            });
         });
 
         // test code
