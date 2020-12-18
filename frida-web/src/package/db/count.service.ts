@@ -18,6 +18,7 @@ export class CountService {
         this.deviceService.addMessageListener((msg: string) => {
             this.anaysMsg(msg);
         });
+        this.restartTask();
     }
 
     anaysMsg(msg: string) {
