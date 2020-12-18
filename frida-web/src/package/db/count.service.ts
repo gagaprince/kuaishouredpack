@@ -42,12 +42,13 @@ export class CountService {
             this.countMap.set(owner, this.countMap.get(owner) + 1);
         }
         const count = this.countMap.get(owner);
+        countDebug(`当前设备:${owner}--count:${count}`);
         if (count > 30) {
             this.resetCount(grubRecord);
             countDebug('计数器满 重启设备');
             while (true) {
                 const flag = await this.deviceService.restartApp(owner)
-                if(flag){
+                if (flag) {
                     break;
                 }
             }
@@ -55,5 +56,22 @@ export class CountService {
     }
     resetCount(grubRecord: GrubRecord) {
         this.countMap.delete(grubRecord.owner);
+    }
+
+    restartTask() {// 定时重启任务
+        setInterval(async () => {
+            const devices = this.deviceService.getAllDevice();
+            for (let i = 0; i < devices.length; i++) {
+                const owner = devices[i];
+                this.countMap.delete(owner);
+                while (true) {
+                    const flag = await this.deviceService.restartApp(owner)
+                    if (flag) {
+                        break;
+                    }
+                }
+            }
+
+        }, 30 * 60 * 1000);
     }
 }
