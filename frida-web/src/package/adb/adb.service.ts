@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IDevice } from '../device/device.service';
+import { DEVICE_STATUS, IDevice } from '../device/device.service';
 
 const adbDebug = require('debug')('adbService:');
 
@@ -42,6 +42,7 @@ export class AdbService {
                     await this.sleep(1000);
                     await this.client.shell(adbDevice.id, 'am start -n  com.smile.gifmaker/com.yxcorp.gifshow.HomeActivity')
                     await this.sleep(10000);
+                    device.status = DEVICE_STATUS.NORMAL;
                 }
                 // await this.client.disconnect(ip, adbPort, (err, id) => {
                 //     adbDebug(err, id);
@@ -53,6 +54,7 @@ export class AdbService {
     }
 
     async stopAppByDevice(device: IDevice) {
+        device.status = DEVICE_STATUS.STOP;
         const { ip, adbPort } = device;
         if (ip && adbPort) {
             try {
@@ -118,7 +120,7 @@ export class AdbService {
     async sleep(time: number) {
         return new Promise((res) => {
             setTimeout(() => {
-                res()
+                res('')
             }, time);
         });
     }

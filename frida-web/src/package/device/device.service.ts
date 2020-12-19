@@ -14,7 +14,8 @@ const scriptDebug = require('debug')('frida.script.send:');
 export const enum DEVICE_STATUS {
     NORMAL = 1,
     OFFLINE,
-    DESTROY
+    DESTROY,
+    STOP
 }
 
 export class IDevice {
@@ -294,7 +295,7 @@ export class DeviceService {
     async sleep(time: number) {
         return new Promise((res) => {
             setTimeout(() => {
-                res()
+                res('')
             }, time);
         });
     }

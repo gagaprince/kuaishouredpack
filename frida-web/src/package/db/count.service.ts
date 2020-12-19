@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DeviceService } from '../device/device.service';
+import { DeviceService, DEVICE_STATUS } from '../device/device.service';
 
 const countDebug = require('debug')('count.service:');
 
@@ -65,14 +65,16 @@ export class CountService {
             for (let i = 0; i < devices.length; i++) {
                 const owner = devices[i];
                 this.countMap.delete(owner);
-                while (true) {
-                    const flag = await this.deviceService.restartApp(owner)
-                    if (flag) {
-                        break;
+                const device = this.deviceService.getDeviceByLion(owner);
+                if(device.status!=DEVICE_STATUS.STOP){
+                    while (true) {
+                        const flag = await this.deviceService.restartApp(owner)
+                        if (flag) {
+                            break;
+                        }
                     }
-                }
+                } 
             }
-
         }, 30 * 60 * 1000);
     }
 }
