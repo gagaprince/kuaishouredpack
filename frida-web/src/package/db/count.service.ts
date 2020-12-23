@@ -65,15 +65,17 @@ export class CountService {
             for (let i = 0; i < devices.length; i++) {
                 const owner = devices[i];
                 this.countMap.delete(owner);
-                const device = this.deviceService.getDeviceByLion(owner);
-                if(device.status!=DEVICE_STATUS.STOP){
-                    while (true) {
+                while (true) {
+                    const device = this.deviceService.getDeviceByLion(owner);
+                    if (device.status != DEVICE_STATUS.STOP) {
                         const flag = await this.deviceService.restartApp(owner)
                         if (flag) {
                             break;
                         }
+                    } else {
+                        break;
                     }
-                } 
+                }
             }
         }, 30 * 60 * 1000);
     }
